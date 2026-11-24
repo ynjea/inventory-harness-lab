@@ -16,13 +16,17 @@ concurrency:
   group: verify-${{ github.head_ref || github.ref_name }}
   cancel-in-progress: true
 
+# 검증은 저장소를 읽기만 한다. 토큰 권한을 읽기로 묶어 둔다.
+permissions:
+  contents: read
+
 jobs:
   verify:
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
     steps:
-      # 보호 경로 검사(Protect)가 base 브랜치와 merge-base 를 구한다. 얕은 클론이면 기준을 찾지 못한다.
+      # 보호 경로 검사(Protected)가 base 브랜치와 merge-base 를 구한다. 얕은 클론이면 기준을 찾지 못한다.
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
@@ -34,7 +38,7 @@ jobs:
 
       - run: npm ci
 
-      # Protect → Prepare → Types → Lint → Arch → Test → Domain Verify → Build
+      # Protected → Prepare → Types → Lint → Architecture Check → Test → Build
       # DATABASE_URL 은 verify 스크립트가 검증용 DB로 직접 지정한다.
       - run: npm run verify
         env:
