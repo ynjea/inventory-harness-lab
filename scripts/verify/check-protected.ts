@@ -183,9 +183,8 @@ for (const entry of git(['log', '--format=%H%x1f%B%x1e', `${base.commit}..HEAD`]
   }
 }
 
-/** 승인 하나가 이 파일을 덮는가 */
+/** 승인 하나가 이 파일을 덮는가 — SSOT §5 가 정한 대로 경로로만 승인한다 (전체 승인 표현 없음) */
 const grants = (a: Approval, file: string, rule: string) =>
-  a.value.toLowerCase() === 'all' ||
   a.value === file ||
   a.value === rule ||
   covers(a.value.endsWith('/') ? a.value : a.value + '/', file)
