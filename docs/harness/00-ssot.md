@@ -19,7 +19,7 @@
 | 재고 도메인 | `docs/01-requirements.md` | 원본 지정 |
 | 아키텍처 | `docs/06-architecture.md` | 원본 지정 |
 | 개별 작업 | 해당 GitHub Issue | 원본 지정 |
-| 검증 규칙 | `scripts/verify/` | 원본 지정 (스크립트) |
+| 검증 규칙 | `docs/harness/02-verification.md` | 원본 지정 |
 | 구현·검증 루프 | 없음 | 추후 생성 |
 
 ## 2. 책임 경계
@@ -44,11 +44,14 @@
 
 ### 검증 규칙
 
-`scripts/verify/`의 검증 스크립트는 무엇을 통과해야 변경이 끝난 것인지를 실행 결과로 판정한다.
+`docs/harness/02-verification.md`는 무엇을 통과해야 변경이 끝난 것인지를 정한다.
+검증 단계의 구성과 순서, 게이트와 경고의 구분, 검사 불능의 처리, 검증 환경, Issue 단위 검증의 형식을 다룬다.
 
 검증 항목의 내용은 정하지 않는다. 재고 규칙은 `docs/01-requirements.md`, 구조 규칙은
-`docs/06-architecture.md`, 보호 경로는 이 문서 5절, 이번 작업의 종료 조건은 Issue가 정하고,
-검증 스크립트는 그것을 읽거나 옮겨 판정한다.
+`docs/06-architecture.md`, 보호 경로는 이 문서 5절, 이번 작업의 종료 조건은 Issue가 정한다.
+
+검증 스크립트(`scripts/verify/` 등)와 `npm run verify`는 이 문서가 정한 판정을 실행하는 수단이다.
+스크립트와 이 문서가 다르면 이 문서를 따르고 불일치를 보고한다.
 
 ## 3. 현재 없는 책임 영역
 
